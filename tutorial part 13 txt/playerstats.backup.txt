@@ -1,0 +1,53 @@
+public int maxHealth = 100;
+    public int attack = 10;
+
+    PlayerController playerController;
+
+    [HideInInspector]
+    public bool isDying;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        playerController = GetComponent<PlayerController>();
+
+        // jika darah player 0 saat permainan dimulai, set darah menjadi penuh
+        if (PlayerPrefsManager.instance.GetHealth() <= 0)
+        {
+            PlayerPrefsManager.instance.SetHealth(maxHealth);
+        }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (playerController.GetComponentInChildren<Animator>().GetBool("IsDying"))
+        {
+            playerController.GetComponent<CharacterController>().enabled = false;
+        }
+
+        if (PlayerPrefsManager.instance.GetHealth() <= 0 && isDying == false)
+        {
+            Dying();
+        }
+    }
+
+    public void TakeDamage(int damage)
+    {
+        int currentHealth = PlayerPrefsManager.instance.GetHealth();
+        currentHealth -= damage;
+        PlayerPrefsManager.instance.SetHealth(currentHealth);
+    }
+
+    public void Dying()
+    {
+        playerController.GetComponentInChildren<Animator>().SetBool("IsDying", true);
+        isDying = true;
+        StartCoroutine(WaitDying());
+    }
+
+    IEnumerator WaitDying()
+    {
+        yield return new WaitForSeconds(2f);
+        playerController.GetComponentInChildren<Animator>().SetBool("IsDying", false);
+    }

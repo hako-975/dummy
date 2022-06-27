@@ -1,0 +1,16 @@
+buat folder Resources di dalam folder Prefabs > Models
+duplikat model Player letakkan di folder Resources
+ubah nama Player menjadi Player Network
+buat script PlayerControllerNetwork.cs
+copy isi script PlayerController.cs paste isinya ke script PlayerControllerNetwork.cs
+gunakan MonoBehaviourPun
+buat script PausedNetworkManager.cs
+pada script LobbyManager.cs tambahkan PhotonNetwork.NickName = nickName; pada function OnChangedNickName()
+ubah script NetworkManager.cs
+tambahkan komponen Photon View pada prefabs Player Network
+	- Photon RigidBody
+	- Photon Transform View
+	- Photon Animator pada child: Layer 0=continuous, isGrounded=continuous, isRunning=continuous
+
+
+tambahkan ping

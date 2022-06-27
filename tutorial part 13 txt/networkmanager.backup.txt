@@ -1,0 +1,71 @@
+MonoBehaviourPunCallbacks
+
+public PlayerController playerPrefabs;
+
+    [HideInInspector]
+    public PlayerController localPlayer;
+
+    public TextMeshProUGUI namaRoom; 
+    public TextMeshProUGUI pemainRoom;
+    public TextMeshProUGUI ping;
+
+    void Start()
+    {
+        if (PhotonNetwork.IsConnected == false)
+        {
+            SceneManager.LoadScene("Main Menu");
+            return;
+        }
+
+        PlayerController.RefreshInstance(ref localPlayer, playerPrefabs);
+
+        namaRoom.text = "Nama Room: " + PhotonNetwork.CurrentRoom.Name;
+        pemainRoom.text = "Pemain: " + PhotonNetwork.CurrentRoom.PlayerCount + " / " + PhotonNetwork.CurrentRoom.MaxPlayers;
+    }
+    private void Update()
+    {
+        ping.text = PhotonNetwork.GetPing().ToString() + " ms";
+    }
+
+    public void OnClickLeaveRoom()
+    {
+        Time.timeScale = 1f;
+        StartCoroutine(WaitLeaveRoom());
+    }
+
+    IEnumerator WaitLeaveRoom()
+    {
+        PhotonNetwork.LeaveRoom();
+
+        while (PhotonNetwork.InRoom)
+        {
+            yield return null;
+        }
+
+        PhotonNetwork.JoinLobby();
+        SceneManager.LoadScene("Lobby");
+    }
+
+    public override void OnJoinedLobby()
+    {
+        base.OnJoinedLobby();
+        SceneManager.LoadScene("Lobby");
+    }
+
+    public override void OnConnectedToMaster()
+    {
+        base.OnConnectedToMaster();
+        PhotonNetwork.JoinLobby();
+    }
+
+    public override void OnPlayerEnteredRoom(Player newPlayer)
+    {
+        base.OnPlayerEnteredRoom(newPlayer);
+        pemainRoom.text = "Pemain: " + PhotonNetwork.CurrentRoom.PlayerCount + " / " + PhotonNetwork.CurrentRoom.MaxPlayers;
+    }
+
+    public override void OnPlayerLeftRoom(Player otherPlayer)
+    {
+        base.OnPlayerLeftRoom(otherPlayer);
+        pemainRoom.text = "Pemain: " + PhotonNetwork.CurrentRoom.PlayerCount + " / " + PhotonNetwork.CurrentRoom.MaxPlayers;
+    }
