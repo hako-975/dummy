@@ -1,0 +1,4 @@
+keytool -list -v -keystore C:\Users\andri\.android\debug.keystore -alias androiddebugkey -storepass android -keypass android
+
+delete keystore alias:
+keytool -delete -noprompt -alias aliasname -keystore location/keystorefile.keystore

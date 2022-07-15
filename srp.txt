@@ -1,0 +1,2 @@
+dengan srp : 10 detik
+tanpa srp : 17 detik

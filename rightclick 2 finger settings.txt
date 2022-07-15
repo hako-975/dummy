@@ -1,0 +1,8 @@
+1. Open task manager to kill Elan Service (2x), ETD Control Center, ETD Control Center Helper and ETDTouch.
+ 
+2. Used regedit to set Tap_Two_Finger_ShowItem, Tap_Two_Finger, Tap_Two_Finger_Enable to 1 (located in HKEY_Current_User\Software\Elantech\Smartpad)
+	Tap_Two_Finger_Enable = 1
+	Tap_Two_Finger = 1
+3. Restart, login with account & 2 finger tap now works as right click.
+
+4. Remove admin rights if required

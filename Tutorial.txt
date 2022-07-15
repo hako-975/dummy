@@ -1,0 +1,4 @@
+Kita akan membuat sistem checkpoint
+
+Part 12
+---
