@@ -1,0 +1,25 @@
+buat folder baru anya-and-the-stella-star
+buka unity hub
+pilih template 2d core 
+buat nama project Anya and the Stella star
+
+switch to android
+set portrait
+
+other settings > color space: linear
+
+package manager
+hapus psd importer
+hapus jetbrains 
+hapus vscode
+update semua
+
+import resources
+
+Desain Main Menu
+
+script PlayerPrefsManager
+
+script MainMenuManager
+
+script loading manager
