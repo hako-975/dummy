@@ -6,3 +6,5 @@
 3. Restart, login with account & 2 finger tap now works as right click.
 
 4. Remove admin rights if required
+
+Open regedit, go to HKEY_CURRENT_USER -> SOFTWARE -> Elantech -> Smartpad, change ScrollControl_Mode from 0 to 1
